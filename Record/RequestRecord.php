@@ -1,12 +1,12 @@
 <?php
 
-namespace Kraken\Channel\Request;
+namespace Kraken\Channel\Record;
 
 use Kraken\Throwable\ThrowableProxy;
 use Error;
 use Exception;
 
-class Request
+class RequestRecord
 {
     /**
      * @var string

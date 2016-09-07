@@ -1,8 +1,10 @@
 <?php
 
-namespace Kraken\Channel;
+namespace Kraken\Channel\Router;
 
-class ChannelRouter implements ChannelRouterInterface
+use Kraken\Channel\Protocol\ProtocolInterface;
+
+class Router implements RouterInterface
 {
     /**
      * @var int
@@ -20,7 +22,7 @@ class ChannelRouter implements ChannelRouterInterface
     const MODE_FIREWALL = 2;
 
     /**
-     * @var ChannelRouterHandler[]
+     * @var RouterRule[]
      */
     protected $rules;
 
@@ -30,7 +32,7 @@ class ChannelRouter implements ChannelRouterInterface
     protected $rulesPointer;
 
     /**
-     * @var ChannelRouterHandler[]
+     * @var RouterRule[]
      */
     protected $anchors;
 
@@ -47,7 +49,7 @@ class ChannelRouter implements ChannelRouterInterface
     /**
      * @param int $flags
      */
-    public function __construct($flags = ChannelRouter::MODE_ROUTER)
+    public function __construct($flags = Router::MODE_ROUTER)
     {
         $this->rules = [];
         $this->rulesPointer = 0;
@@ -74,9 +76,9 @@ class ChannelRouter implements ChannelRouterInterface
      * @override
      * @inheritDoc
      */
-    public function handle($name, ChannelProtocolInterface $protocol, $flags = 0, callable $success = null, callable $failure = null, callable $cancel = null, $timeout = 0.0)
+    public function handle($name, ProtocolInterface $protocol, $flags = 0, callable $success = null, callable $failure = null, callable $cancel = null, $timeout = 0.0)
     {
-        $status = $this->flags === ChannelRouter::MODE_ROUTER;
+        $status = $this->flags === Router::MODE_ROUTER;
         $handled = !$status;
 
         foreach ($this->rules as $handler)
@@ -139,7 +141,7 @@ class ChannelRouter implements ChannelRouterInterface
     public function addRule(callable $matcher, callable $handler, $propagate = false, $limit = 0)
     {
         return $this->addRuleHandler(
-            new ChannelRouterHandler($this, $matcher, $handler, $propagate, $limit)
+            new RouterRule($this, $matcher, $handler, $propagate, $limit)
         );
     }
 
@@ -150,7 +152,7 @@ class ChannelRouter implements ChannelRouterInterface
     public function addAnchor(callable $handler, $propagate = false, $limit = 0)
     {
         return $this->addDefaultHandler(
-            new ChannelRouterHandler($this, function() {}, $handler, $propagate, $limit)
+            new RouterRule($this, function() {}, $handler, $propagate, $limit)
         );
     }
 
@@ -165,10 +167,10 @@ class ChannelRouter implements ChannelRouterInterface
     }
 
     /**
-     * @param ChannelRouterHandler $handler
-     * @return ChannelRouterHandler
+     * @param RouterRule $handler
+     * @return RouterRule
      */
-    protected function addRuleHandler(ChannelRouterHandler $handler)
+    protected function addRuleHandler(RouterRule $handler)
     {
         $this->rules[$this->rulesPointer] = $handler;
         $handler->setPointer('handlers', $this->rulesPointer);
@@ -178,10 +180,10 @@ class ChannelRouter implements ChannelRouterInterface
     }
 
     /**
-     * @param ChannelRouterHandler $handler
-     * @return ChannelRouterHandler
+     * @param RouterRule $handler
+     * @return RouterRule
      */
-    protected function addDefaultHandler(ChannelRouterHandler $handler)
+    protected function addDefaultHandler(RouterRule $handler)
     {
         $this->anchors[$this->anchorsPointer] = $handler;
         $handler->setPointer('anchors', $this->anchorsPointer);

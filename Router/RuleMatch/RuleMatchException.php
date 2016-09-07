@@ -1,8 +1,8 @@
 <?php
 
-namespace Kraken\Channel\Router;
+namespace Kraken\Channel\Router\RuleMatch;
 
-use Kraken\Channel\ChannelProtocolInterface;
+use Kraken\Channel\Protocol\ProtocolInterface;
 use Kraken\Util\Support\StringSupport;
 
 class RuleMatchException
@@ -30,10 +30,10 @@ class RuleMatchException
 
     /**
      * @param string $exception
-     * @param ChannelProtocolInterface $protocol
+     * @param ProtocolInterface $protocol
      * @return bool
      */
-    public function __invoke($exception, ChannelProtocolInterface $protocol)
+    public function __invoke($exception, ProtocolInterface $protocol)
     {
         return StringSupport::match($this->exception, $protocol->getException());
     }

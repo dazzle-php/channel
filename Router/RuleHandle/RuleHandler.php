@@ -1,8 +1,8 @@
 <?php
 
-namespace Kraken\Channel\Router;
+namespace Kraken\Channel\Router\RuleHandle;
 
-use Kraken\Channel\ChannelProtocolInterface;
+use Kraken\Channel\Protocol\ProtocolInterface;
 
 class RuleHandler
 {
@@ -29,14 +29,14 @@ class RuleHandler
 
     /**
      * @param string $alias
-     * @param ChannelProtocolInterface $protocol
+     * @param ProtocolInterface $protocol
      * @param int $flags
      * @param callable|null $success
      * @param callable|null $failure
      * @param callable|null $cancel
      * @param float $timeout
      */
-    public function __invoke($alias, ChannelProtocolInterface $protocol, $flags, callable $success = null, callable $failure = null, callable $cancel = null, $timeout = 0.0)
+    public function __invoke($alias, ProtocolInterface $protocol, $flags, callable $success = null, callable $failure = null, callable $cancel = null, $timeout = 0.0)
     {
         $callback = $this->callback;
 

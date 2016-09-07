@@ -1,8 +1,8 @@
 <?php
 
-namespace Kraken\Channel;
+namespace Kraken\Channel\Protocol;
 
-interface ChannelProtocolInterface
+interface ProtocolInterface
 {
     /**
      * Set type of protocol.
@@ -12,7 +12,7 @@ interface ChannelProtocolInterface
      *
      * @param string $type
      * @param bool $reassign
-     * @return ChannelProtocolInterface
+     * @return ProtocolInterface
      */
     public function setType($type, $reassign = false);
 
@@ -24,7 +24,7 @@ interface ChannelProtocolInterface
      *
      * @param string $pid
      * @param bool $reassign
-     * @return ChannelProtocolInterface
+     * @return ProtocolInterface
      */
     public function setPid($pid, $reassign = false);
 
@@ -36,7 +36,7 @@ interface ChannelProtocolInterface
      *
      * @param string $destination
      * @param bool $reassign
-     * @return ChannelProtocolInterface
+     * @return ProtocolInterface
      */
     public function setDestination($destination, $reassign = false);
 
@@ -48,7 +48,7 @@ interface ChannelProtocolInterface
      *
      * @param string $origin
      * @param bool $reassign
-     * @return ChannelProtocolInterface
+     * @return ProtocolInterface
      */
     public function setOrigin($origin, $reassign = false);
 
@@ -60,7 +60,7 @@ interface ChannelProtocolInterface
      *
      * @param string $message
      * @param bool $reassign
-     * @return ChannelProtocolInterface
+     * @return ProtocolInterface
      */
     public function setMessage($message, $reassign = false);
 
@@ -72,7 +72,7 @@ interface ChannelProtocolInterface
      *
      * @param string $exception
      * @param bool $reassign
-     * @return ChannelProtocolInterface
+     * @return ProtocolInterface
      */
     public function setException($exception, $reassign = false);
 
@@ -84,7 +84,7 @@ interface ChannelProtocolInterface
      *
      * @param int $timestamp
      * @param bool $reassign
-     * @return ChannelProtocolInterface
+     * @return ProtocolInterface
      */
     public function setTimestamp($timestamp, $reassign = false);
 
@@ -142,7 +142,7 @@ interface ChannelProtocolInterface
      *
      * @param mixed[] $args
      * @param bool $reassign
-     * @return ChannelProtocolInterface
+     * @return ProtocolInterface
      */
     public function setAll($args = [], $reassign = false);
 

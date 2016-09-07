@@ -1,6 +1,6 @@
 <?php
 
-namespace Kraken\Channel\Request;
+namespace Kraken\Channel\Record;
 
 use Kraken\Util\Support\TimeSupport;
 use Kraken\Throwable\Exception\Runtime\TimeoutException;
@@ -8,10 +8,10 @@ use Kraken\Throwable\ThrowableProxy;
 use Error;
 use Exception;
 
-trait RequestHelperTrait
+trait RequestRecordStorage
 {
     /**
-     * @var Request[]
+     * @var RequestRecord[]
      */
     protected $reqs = [];
 
@@ -23,7 +23,7 @@ trait RequestHelperTrait
      * @param callable|null $failure
      * @param callable|null $cancel
      * @param float $timeout
-     * @return Request
+     * @return RequestRecord
      */
     protected function createRequest($pid, callable $success = null, callable $failure = null, callable $cancel = null, $timeout = 0.0)
     {
@@ -32,7 +32,7 @@ trait RequestHelperTrait
             $timeout = $timeout * 1000 + TimeSupport::now();
         }
 
-        return new Request($pid, $success, $failure, $cancel, $timeout);
+        return new RequestRecord($pid, $success, $failure, $cancel, $timeout);
     }
 
     /**
@@ -50,9 +50,9 @@ trait RequestHelperTrait
      * Add new RequestRecord to storage.
      *
      * @param string $pid
-     * @param Request $request
+     * @param RequestRecord $request
      */
-    protected function addRequest($pid, Request $request)
+    protected function addRequest($pid, RequestRecord $request)
     {
         $this->reqs[$pid] = $request;
     }
@@ -61,7 +61,7 @@ trait RequestHelperTrait
      * Return RequestRecord if it exists or null if it does not exist.
      *
      * @param string $pid
-     * @return Request|null
+     * @return RequestRecord|null
      */
     protected function getRequest($pid)
     {
@@ -130,7 +130,7 @@ trait RequestHelperTrait
 
         foreach ($expiredReqs as $request)
         {
-            $request->cancel(new ThrowableProxy(new TimeoutException("Request has expired.")));
+            $request->cancel(new ThrowableProxy(new TimeoutException("RequestRecord has expired.")));
         }
     }
 }

@@ -1,19 +1,19 @@
 <?php
 
-namespace Kraken\Channel\Response;
+namespace Kraken\Channel\Record;
 
 use Kraken\Util\Support\TimeSupport;
 use Kraken\Throwable\Exception\System\TaskIncompleteException;
 
-trait ResponseHelperTrait
+trait ResponseRecordStorage
 {
     /**
-     * @var Response[]
+     * @var ResponseRecord[]
      */
     protected $reps = [];
 
     /**
-     * @var Response[]
+     * @var ResponseRecord[]
      */
     protected $handledReps = [];
 
@@ -29,11 +29,11 @@ trait ResponseHelperTrait
      * @param string $alias
      * @param float $timeout
      * @param float $timeoutIncrease
-     * @return Response
+     * @return ResponseRecord
      */
     protected function createResponse($pid, $alias, $timeout = 0.0, $timeoutIncrease = 1.0)
     {
-        return new Response($pid, $alias, $timeout, $timeoutIncrease);
+        return new ResponseRecord($pid, $alias, $timeout, $timeoutIncrease);
     }
 
     /**
@@ -51,9 +51,9 @@ trait ResponseHelperTrait
      * Add new ResponseRecord to storage.
      *
      * @param string $pid
-     * @param Response $response
+     * @param ResponseRecord $response
      */
-    protected function addResponse($pid, Response $response)
+    protected function addResponse($pid, ResponseRecord $response)
     {
         $this->reps[$pid] = $response;
     }
@@ -62,7 +62,7 @@ trait ResponseHelperTrait
      * Return ResponseRecord if it exists or null if it does not exist.
      *
      * @param string $pid
-     * @return Response
+     * @return ResponseRecord
      */
     protected function getResponse($pid)
     {
@@ -80,14 +80,14 @@ trait ResponseHelperTrait
         if ($exception !== TaskIncompleteException::class)
         {
             unset($this->reps[$pid]);
-            $this->handledReps[$pid] = new Response($pid, '', TimeSupport::now() + $this->handledRepsTimeout);
+            $this->handledReps[$pid] = new ResponseRecord($pid, '', TimeSupport::now() + $this->handledRepsTimeout);
         }
     }
 
     /**
      * Return all unhandled ResponseRecords in array form.
      *
-     * @return Response[]
+     * @return ResponseRecord[]
      */
     protected function unfinishedResponses()
     {

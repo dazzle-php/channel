@@ -1,10 +1,11 @@
 <?php
 
-namespace Kraken\Channel;
+namespace Kraken\Channel\Encoder;
 
+use Kraken\Channel\Protocol\ProtocolInterface;
 use Kraken\Util\Parser\ParserInterface;
 
-class ChannelEncoder implements ChannelEncoderInterface
+class Encoder implements EncoderInterface
 {
     /**
      * @var ParserInterface
@@ -12,7 +13,7 @@ class ChannelEncoder implements ChannelEncoderInterface
     protected $parser;
 
     /**
-     * @var ChannelProtocolInterface
+     * @var ProtocolInterface
      */
     protected $protocol;
 
@@ -38,7 +39,7 @@ class ChannelEncoder implements ChannelEncoderInterface
      * @override
      * @inheritDoc
      */
-    public function with(ChannelProtocolInterface $protocol)
+    public function with(ProtocolInterface $protocol)
     {
         $this->protocol = $protocol;
 

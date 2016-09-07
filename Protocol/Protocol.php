@@ -1,8 +1,8 @@
 <?php
 
-namespace Kraken\Channel;
+namespace Kraken\Channel\Protocol;
 
-class ChannelProtocol implements ChannelProtocolInterface
+class Protocol implements ProtocolInterface
 {
     /**
      * @var string

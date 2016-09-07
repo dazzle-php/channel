@@ -1,18 +1,19 @@
 <?php
 
-namespace Kraken\Channel;
+namespace Kraken\Channel\Router;
 
+use Kraken\Channel\Protocol\ProtocolInterface;
 use Kraken\Throwable\Exception\Logic\ResourceUndefinedException;
 
-class ChannelRouterComposite implements ChannelRouterCompositeInterface
+class RouterComposite implements RouterCompositeInterface
 {
     /**
-     * @var ChannelRouterInterface[]|ChannelRouterCompositeInterface[]
+     * @var RouterInterface[]|RouterCompositeInterface[]
      */
     protected $bus;
 
     /**
-     * @param ChannelRouterInterface[]|ChannelRouterCompositeInterface[] $bus
+     * @param RouterInterface[]|RouterCompositeInterface[] $bus
      */
     public function __construct($bus = [])
     {
@@ -49,7 +50,7 @@ class ChannelRouterComposite implements ChannelRouterCompositeInterface
     {
         if (!isset($this->bus[$name]))
         {
-            throw new ResourceUndefinedException("Kraken\\Channel\\ChannelRouterComposite has no registered bus $name.");
+            throw new ResourceUndefinedException(__CLASS__ . " has no registered bus $name.");
         }
 
         return $this->bus[$name];
@@ -93,7 +94,7 @@ class ChannelRouterComposite implements ChannelRouterCompositeInterface
      * @override
      * @inheritDoc
      */
-    public function handle($name, ChannelProtocolInterface $protocol, $flags = 0, callable $success = null, callable $failure = null, callable $cancel = null, $timeout = 0.0)
+    public function handle($name, ProtocolInterface $protocol, $flags = 0, callable $success = null, callable $failure = null, callable $cancel = null, $timeout = 0.0)
     {
         $handled = false;
 

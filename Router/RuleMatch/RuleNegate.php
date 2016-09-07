@@ -1,8 +1,8 @@
 <?php
 
-namespace Kraken\Channel\Router;
+namespace Kraken\Channel\Router\RuleMatch;
 
-use Kraken\Channel\ChannelProtocolInterface;
+use Kraken\Channel\Protocol\ProtocolInterface;
 
 class RuleNegate
 {
@@ -29,10 +29,10 @@ class RuleNegate
 
     /**
      * @param string $name
-     * @param ChannelProtocolInterface $protocol
+     * @param ProtocolInterface $protocol
      * @return bool
      */
-    public function __invoke($name, ChannelProtocolInterface $protocol)
+    public function __invoke($name, ProtocolInterface $protocol)
     {
         return !call_user_func_array($this->rule, [ $name, $protocol ]);
     }

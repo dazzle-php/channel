@@ -1,16 +1,18 @@
 <?php
 
-namespace Kraken\Channel;
+namespace Kraken\Channel\Encoder;
 
-interface ChannelEncoderInterface
+use Kraken\Channel\Protocol\ProtocolInterface;
+
+interface EncoderInterface
 {
     /**
      * Set protocol to be encoded or data decoded into.
      *
-     * @param ChannelProtocolInterface $protocol
-     * @return ChannelEncoderInterface
+     * @param ProtocolInterface $protocol
+     * @return EncoderInterface
      */
-    public function with(ChannelProtocolInterface $protocol);
+    public function with(ProtocolInterface $protocol);
 
     /**
      * Encode protocol to string.
@@ -23,7 +25,7 @@ interface ChannelEncoderInterface
      * Decode protocol from string.
      *
      * @param $str
-     * @return ChannelProtocolInterface
+     * @return ProtocolInterface
      */
     public function decode($str);
 }

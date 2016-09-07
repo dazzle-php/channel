@@ -1,8 +1,8 @@
 <?php
 
-namespace Kraken\Channel\Response;
+namespace Kraken\Channel\Record;
 
-class Response
+class ResponseRecord
 {
     /**
      * @var string

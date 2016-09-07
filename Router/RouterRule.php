@@ -1,11 +1,13 @@
 <?php
 
-namespace Kraken\Channel;
+namespace Kraken\Channel\Router;
 
-class ChannelRouterHandler
+use Kraken\Channel\Protocol\ProtocolInterface;
+
+class RouterRule
 {
     /**
-     * @var ChannelRouterInterface
+     * @var RouterInterface
      */
     protected $router;
 
@@ -40,13 +42,13 @@ class ChannelRouterHandler
     protected $cancelled;
 
     /**
-     * @param ChannelRouterInterface $router
+     * @param RouterInterface $router
      * @param callable $matcher
      * @param callable $handler
      * @param bool $propagate
      * @param int $limit
      */
-    public function __construct(ChannelRouterInterface $router, callable $matcher, callable $handler, $propagate = false, $limit = 0)
+    public function __construct(RouterInterface $router, callable $matcher, callable $handler, $propagate = false, $limit = 0)
     {
         $this->router = $router;
         $this->matcher = $matcher;
@@ -73,7 +75,7 @@ class ChannelRouterHandler
     /**
      * Return Router to which handler is attached to.
      *
-     * @return ChannelRouterInterface
+     * @return RouterInterface
      */
     public function getRouter()
     {
@@ -84,10 +86,10 @@ class ChannelRouterHandler
      * Match given message protocol.
      *
      * @param string $sender
-     * @param ChannelProtocolInterface $protocol
+     * @param ProtocolInterface $protocol
      * @return bool
      */
-    public function match($sender, ChannelProtocolInterface $protocol)
+    public function match($sender, ProtocolInterface $protocol)
     {
         $callback = $this->matcher;
         return $callback($sender, $protocol);
@@ -97,7 +99,7 @@ class ChannelRouterHandler
      * Handle given message protocol.
      *
      * @param string $sender
-     * @param ChannelProtocolInterface $protocol
+     * @param ProtocolInterface $protocol
      * @param int $flags
      * @param callable|null $success
      * @param callable|null $failure
@@ -105,7 +107,7 @@ class ChannelRouterHandler
      * @param float $timeout
      * @return bool
      */
-    public function handle($sender, ChannelProtocolInterface $protocol, $flags, callable $success = null, callable $failure = null, callable $cancel = null, $timeout = 0.0)
+    public function handle($sender, ProtocolInterface $protocol, $flags, callable $success = null, callable $failure = null, callable $cancel = null, $timeout = 0.0)
     {
         $callback = $this->handler;
         $callback($sender, $protocol, $flags, $success, $failure, $cancel, $timeout);

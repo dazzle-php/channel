@@ -1,14 +1,16 @@
 <?php
 
-namespace Kraken\Channel;
+namespace Kraken\Channel\Router;
 
-interface ChannelRouterInterface
+use Kraken\Channel\Protocol\ProtocolInterface;
+
+interface RouterInterface
 {
     /**
      * Handle data using Router.
      *
      * @param string $name
-     * @param ChannelProtocolInterface $protocol
+     * @param ProtocolInterface $protocol
      * @param int $flags
      * @param callable|null $success
      * @param callable|null $failure
@@ -16,7 +18,7 @@ interface ChannelRouterInterface
      * @param float $timeout
      * @return bool
      */
-    public function handle($name, ChannelProtocolInterface $protocol, $flags = 0, callable $success = null, callable $failure = null, callable $cancel = null, $timeout = 0.0);
+    public function handle($name, ProtocolInterface $protocol, $flags = 0, callable $success = null, callable $failure = null, callable $cancel = null, $timeout = 0.0);
 
     /**
      * Erase Router.
@@ -30,7 +32,7 @@ interface ChannelRouterInterface
      * @param callable $handler
      * @param bool $propagate
      * @param int $limit
-     * @return ChannelRouterHandler|ChannelRouterHandler[]
+     * @return RouterRule|RouterRule[]
      */
     public function addRule(callable $matcher, callable $handler, $propagate = false, $limit = 0);
 
@@ -40,7 +42,7 @@ interface ChannelRouterInterface
      * @param callable $handler
      * @param bool $propagate
      * @param int $limit
-     * @return ChannelRouterHandler|ChannelRouterHandler[]
+     * @return RouterRule|RouterRule[]
      */
     public function addAnchor(callable $handler, $propagate = false, $limit = 0);
 }
