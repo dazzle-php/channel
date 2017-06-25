@@ -31,7 +31,8 @@
         "phpunit/phpunit": ">=4.8.0 <5.4.0"
     },
     "suggest": {
-        "dazzle-php/channel-socket": "0.5.*"
+        "dazzle-php/channel-socket": "0.5.*",
+        "dazzle-php/channel-zmq": "0.5.*"
     },
     "autoload": {
         "psr-4": {
