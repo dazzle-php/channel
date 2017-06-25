@@ -4,6 +4,7 @@ namespace Dazzle\Channel;
 
 use Dazzle\Channel\Encoder\Encoder;
 use Dazzle\Channel\Encoder\EncoderInterface;
+use Dazzle\Channel\Model\ModelFactoryInterface;
 use Dazzle\Channel\Router\Router;
 use Dazzle\Channel\Router\RouterComposite;
 use Dazzle\Loop\LoopInterface;
@@ -14,10 +15,10 @@ class ChannelFactory extends Factory implements ChannelFactoryInterface
 {
     /**
      * @param string $name
-     * @param ChannelModelFactoryInterface $modelFactory
+     * @param ModelFactoryInterface $modelFactory
      * @param LoopInterface|null $loop
      */
-    public function __construct($name, ChannelModelFactoryInterface $modelFactory, LoopInterface $loop = null)
+    public function __construct($name, ModelFactoryInterface $modelFactory, LoopInterface $loop = null)
     {
         parent::__construct();
 

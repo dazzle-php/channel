@@ -3,6 +3,7 @@
 namespace Dazzle\Channel\Test\TUnit;
 
 use Dazzle\Channel\Encoder\EncoderInterface;
+use Dazzle\Channel\Model\ModelInterface;
 use Dazzle\Channel\Protocol\Protocol;
 use Dazzle\Channel\Protocol\ProtocolInterface;
 use Dazzle\Channel\Router\Router;
@@ -10,7 +11,6 @@ use Dazzle\Channel\Router\RouterComposite;
 use Dazzle\Channel\Router\RouterCompositeInterface;
 use Dazzle\Channel\Channel;
 use Dazzle\Channel\ChannelInterface;
-use Dazzle\Channel\ChannelModelInterface;
 use Dazzle\Event\EventListener;
 use Dazzle\Loop\Loop;
 use Dazzle\Loop\LoopInterface;
@@ -1202,7 +1202,7 @@ class ChannelTest extends TUnit
      */
     public function createChannel($methods = null)
     {
-        $model   = $this->getMock(ChannelModelInterface::class, [], [], '', false);
+        $model   = $this->getMock(ModelInterface::class, [], [], '', false);
         $model
             ->expects($this->any())
             ->method('copyEvents')
@@ -1242,7 +1242,7 @@ class ChannelTest extends TUnit
      */
     public function createModel()
     {
-        $mock = $this->getMock(ChannelModelInterface::class, [], [], '', false);
+        $mock = $this->getMock(ModelInterface::class, [], [], '', false);
 
         $this->setProtectedProperty($this->channel, 'model', $mock);
 

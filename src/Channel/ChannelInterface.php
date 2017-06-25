@@ -2,6 +2,7 @@
 
 namespace Dazzle\Channel;
 
+use Dazzle\Channel\Model\ModelInterface;
 use Dazzle\Channel\Protocol\ProtocolInterface;
 use Dazzle\Channel\Record\RequestRecord;
 use Dazzle\Channel\Router\RouterCompositeInterface;
@@ -31,7 +32,7 @@ interface ChannelInterface extends EventEmitterInterface, LoopAwareInterface
     /**
      * Return model which is being used by Channel.
      *
-     * @return ChannelModelInterface|null
+     * @return ModelInterface|null
      */
     public function getModel();
 

@@ -3,6 +3,7 @@
 namespace Dazzle\Channel\Test\TUnit;
 
 use Dazzle\Channel\Encoder\EncoderInterface;
+use Dazzle\Channel\Model\ModelInterface;
 use Dazzle\Channel\Protocol\Protocol;
 use Dazzle\Channel\Protocol\ProtocolInterface;
 use Dazzle\Channel\Record\RequestRecord;
@@ -12,7 +13,6 @@ use Dazzle\Channel\Channel;
 use Dazzle\Channel\ChannelInterface;
 use Dazzle\Channel\ChannelComposite;
 use Dazzle\Channel\ChannelCompositeInterface;
-use Dazzle\Channel\ChannelModelInterface;
 use Dazzle\Event\EventListener;
 use Dazzle\Loop\Loop;
 use Dazzle\Loop\LoopInterface;
@@ -1428,7 +1428,7 @@ class ChannelCompositeTest extends TUnit
      */
     public function prepareBus($name = 'name', $methods = [])
     {
-        $model   = $this->getMock(ChannelModelInterface::class, [], [], '', false);
+        $model   = $this->getMock(ModelInterface::class, [], [], '', false);
         $model
             ->expects($this->any())
             ->method('copyEvents')

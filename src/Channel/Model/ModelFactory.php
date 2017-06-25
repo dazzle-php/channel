@@ -1,12 +1,12 @@
 <?php
 
-namespace Dazzle\Channel;
+namespace Dazzle\Channel\Model;
 
 use Dazzle\Channel\Model\Null\NullModel;
 use Dazzle\Loop\LoopInterface;
 use Dazzle\Util\Factory\Factory;
 
-class ChannelModelFactory extends Factory implements ChannelModelFactoryInterface
+class ModelFactory extends Factory implements ModelFactoryInterface
 {
     /**
      * @param string $name

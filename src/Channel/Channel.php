@@ -6,6 +6,7 @@ use Dazzle\Channel\Encoder\Encoder;
 use Dazzle\Channel\Encoder\EncoderInterface;
 use Dazzle\Channel\Extra\Request;
 use Dazzle\Channel\Extra\Response;
+use Dazzle\Channel\Model\ModelInterface;
 use Dazzle\Channel\Protocol\Protocol;
 use Dazzle\Channel\Protocol\ProtocolInterface;
 use Dazzle\Channel\Record\RequestRecordStorage;
@@ -82,7 +83,7 @@ class Channel extends EventEmitter implements ChannelInterface
     protected $name;
 
     /**
-     * @var ChannelModelInterface
+     * @var ModelInterface
      */
     protected $model;
 
@@ -123,13 +124,13 @@ class Channel extends EventEmitter implements ChannelInterface
 
     /**
      * @param string $name
-     * @param ChannelModelInterface $model
+     * @param ModelInterface $model
      * @param RouterCompositeInterface $router
      * @param EncoderInterface $encoder
      * @param LoopInterface $loop
      * @throws InstantiationException
      */
-    public function __construct($name, ChannelModelInterface $model, RouterCompositeInterface $router, EncoderInterface $encoder, LoopInterface $loop)
+    public function __construct($name, ModelInterface $model, RouterCompositeInterface $router, EncoderInterface $encoder, LoopInterface $loop)
     {
         parent::__construct($loop);
 

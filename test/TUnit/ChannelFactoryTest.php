@@ -3,11 +3,12 @@
 namespace Dazzle\Channel\Test\TUnit;
 
 use Dazzle\Channel\Encoder\Encoder;
+use Dazzle\Channel\Model\ModelFactory;
 use Dazzle\Channel\Router\RouterComposite;
 use Dazzle\Channel\Channel;
 use Dazzle\Channel\ChannelComposite;
 use Dazzle\Channel\ChannelFactory;
-use Dazzle\Channel\ChannelModelFactory;
+
 use Dazzle\Loop\Loop;
 use Dazzle\Channel\Test\TUnit;
 
@@ -19,7 +20,7 @@ class ChannelFactoryTest extends TUnit
     private $name;
 
     /**
-     * @var ChannelModelFactory
+     * @var ModelFactory
      */
     private $model;
 
@@ -64,7 +65,7 @@ class ChannelFactoryTest extends TUnit
     public function createChannelFactory()
     {
         $this->name  = 'name';
-        $this->model = $this->getMock(ChannelModelFactory::class, [], [], '', false);
+        $this->model = $this->getMock(ModelFactory::class, [], [], '', false);
         $this->loop  = $this->getMock(Loop::class, [], [], '', false);
 
         return new ChannelFactory($this->name, $this->model, $this->loop);

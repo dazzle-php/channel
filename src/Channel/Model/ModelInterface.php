@@ -1,6 +1,6 @@
 <?php
 
-namespace Dazzle\Channel;
+namespace Dazzle\Channel\Model;
 
 use Dazzle\Event\EventEmitterInterface;
 
@@ -13,7 +13,7 @@ use Dazzle\Event\EventEmitterInterface;
  * @event send  : callable(string, string[])
  * @event error : callable(Exception)
  */
-interface ChannelModelInterface extends EventEmitterInterface
+interface ModelInterface extends EventEmitterInterface
 {
     /**
      * Start Channel.

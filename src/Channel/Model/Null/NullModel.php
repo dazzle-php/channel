@@ -2,10 +2,10 @@
 
 namespace Dazzle\Channel\Model\Null;
 
-use Dazzle\Channel\ChannelModelInterface;
+use Dazzle\Channel\Model\ModelInterface;
 use Dazzle\Event\BaseEventEmitter;
 
-class NullModel extends BaseEventEmitter implements ChannelModelInterface
+class NullModel extends BaseEventEmitter implements ModelInterface
 {
     /**
      * @override
